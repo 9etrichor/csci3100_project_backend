@@ -8,7 +8,7 @@ A Django REST API backend for the CSCI3100 project, featuring user authenticatio
 - **API**: Django REST Framework
 - **Authentication**: JWT (JSON Web Tokens)
 - **Database**: PostgreSQL
-- **Package Management**: uv
+- **Package Management**: pip
 - **Containerization**: Docker & Docker Compose
 
 ## Features
@@ -24,7 +24,7 @@ A Django REST API backend for the CSCI3100 project, featuring user authenticatio
 ### Prerequisites
 
 - Python 3.12+
-- uv package manager
+- pip package manager
 - PostgreSQL (or use Docker)
 
 ### Installation
@@ -37,7 +37,7 @@ A Django REST API backend for the CSCI3100 project, featuring user authenticatio
 
 2. **Install dependencies**:
    ```bash
-   uv sync
+   pip install -r requirements.txt
    ```
 
 3. **Set up environment variables**:
@@ -48,12 +48,12 @@ A Django REST API backend for the CSCI3100 project, featuring user authenticatio
 
 4. **Run migrations**:
    ```bash
-   uv run python manage.py migrate
+   python manage.py migrate
    ```
 
 5. **Start the development server**:
    ```bash
-   uv run python manage.py runserver
+   python manage.py runserver
    ```
 
 The API will be available at `http://localhost:8000`.
@@ -106,7 +106,7 @@ The API will be available at `http://localhost:8000`.
 
 ### Troubleshooting
 
-If you encounter `uv: executable file not found` error:
+If you encounter Docker build or runtime errors:
 
 1. **Clean Docker cache**:
    ```bash
@@ -120,7 +120,7 @@ If you encounter `uv: executable file not found` error:
    docker-compose up web
    ```
 
-3. **Still having issues?** See [DOCKER_TROUBLESHOOTING.md](DOCKER_TROUBLESHOOTING.md) for detailed solutions.
+3. **Still having issues?** Check that all environment variables are set correctly in `.env`.
 
 ## API Endpoints
 
@@ -147,8 +147,7 @@ csci3100_project_backend/
 │   └── serializers.py       # DRF serializers
 ├── Dockerfile                # Docker image definition
 ├── docker-compose.yml        # Docker services
-├── pyproject.toml            # Project dependencies
-├── uv.lock                   # Dependency lock file
+├── requirements.txt          # Project dependencies
 └── README.md                 # This file
 ```
 
