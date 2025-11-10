@@ -104,6 +104,24 @@ The API will be available at `http://localhost:8000`.
 - No external tools required—fully self-contained.
 - Compatible with any development environment.
 
+### Troubleshooting
+
+If you encounter `uv: executable file not found` error:
+
+1. **Clean Docker cache**:
+   ```bash
+   docker system prune -a --volumes
+   ```
+
+2. **Force rebuild**:
+   ```bash
+   docker-compose build --no-cache
+   docker-compose --profile migrate up migrate
+   docker-compose up web
+   ```
+
+3. **Still having issues?** See [DOCKER_TROUBLESHOOTING.md](DOCKER_TROUBLESHOOTING.md) for detailed solutions.
+
 ## API Endpoints
 
 ### Authentication
