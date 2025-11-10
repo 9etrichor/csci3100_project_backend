@@ -4,21 +4,26 @@ FROM python:3.12-slim
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
+# Install uv for fast package management
+RUN pip install uv
+
 # Set work directory
 WORKDIR /app
 
-# Copy requirements and install dependencies
+# Copy dependency files
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies globally using uv
+RUN uv pip install --system -r requirements.txt
+RUN python3 -c "import django; print('Django version:', django.get_version())"
 
 # Copy project files
 COPY . .
 
 # Collect static files
-RUN python manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8000
 
 # Run the application
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]

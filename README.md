@@ -98,6 +98,12 @@ The API will be available at `http://localhost:8000`.
 - **View logs**: `docker-compose logs web`
 - **Rebuild**: `docker-compose up --build`
 
+### Docker Details
+
+- Uses `uv` for fast dependency management in containers.
+- Installs dependencies globally to avoid virtual environment issues.
+- Compatible with local `uv` usage for development.
+
 ## API Endpoints
 
 ### Authentication
