@@ -1,10 +1,8 @@
 # Use Python 3.12 slim as base image
-FROM python:3.12-slim as base
+FROM python:3.12-slim
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
-ENV UV_COMPILE_BYTECODE=1
-ENV UV_LINK_MODE=copy
 
 # Install uv for fast package management
 RUN pip install uv
@@ -13,16 +11,19 @@ RUN pip install uv
 WORKDIR /app
 
 # Copy dependency files
-COPY pyproject.toml uv.lock ./
-
-# Install dependencies
-RUN uv sync --frozen --no-install-project --no-dev
+COPY requirements.txt .
+# Install dependencies globally using uv
+RUN uv pip install --system -r requirements.txt
+RUN python3 -c "import django; print('Django version:', django.get_version())"
 
 # Copy project files
 COPY . .
+
+# Collect static files
+RUN python3 manage.py collectstatic --noinput
 
 # Expose port
 EXPOSE 8000
 
 # Run the application
-CMD ["uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
