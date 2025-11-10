@@ -4,16 +4,18 @@ FROM python:3.12-slim
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Install uv for fast package management
-RUN pip install uv
+# Install system dependencies for psycopg2
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
 
 # Set work directory
 WORKDIR /app
 
-# Copy dependency files
+# Copy requirements and install dependencies
 COPY requirements.txt .
-# Install dependencies globally using uv
-RUN uv pip install --system -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 RUN python3 -c "import django; print('Django version:', django.get_version())"
 
 # Copy project files

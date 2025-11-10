@@ -100,9 +100,9 @@ The API will be available at `http://localhost:8000`.
 
 ### Docker Details
 
-- Uses `uv` for fast dependency management in containers.
-- Installs dependencies globally to avoid virtual environment issues.
-- Compatible with local `uv` usage for development.
+- Uses standard `pip` for dependency management.
+- No external tools required—fully self-contained.
+- Compatible with any development environment.
 
 ## API Endpoints
 
