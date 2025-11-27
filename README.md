@@ -1,4 +1,4 @@
-# CSCI3100 Project Backend
+o# CSCI3100 Project Backend
 
 A Django REST API backend for the CSCI3100 project, featuring user authentication with JWT tokens and PostgreSQL database.
 
@@ -15,6 +15,7 @@ A Django REST API backend for the CSCI3100 project, featuring user authenticatio
 
 - User registration and authentication
 - JWT-based token authentication
+
 - Custom user model
 - RESTful API endpoints
 - Docker containerization for easy deployment
